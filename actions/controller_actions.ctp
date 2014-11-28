@@ -47,7 +47,10 @@
 				foreach ($modelObj->{$assoc} as $associationName => $relation):
 					if (!empty($associationName)):
 						$otherModelName = $this->_modelName($associationName);
-						$otherPluralName = $this->_pluralName($associationName);
+						$keyName = $relation['foreignKey'];
+						$otherPluralName = Inflector::variable(
+							Inflector::pluralize(preg_replace('/_id$/', '', $keyName))
+						);
 						echo "\t\t\${$otherPluralName} = \$this->{$currentModelName}->{$otherModelName}->find('list');\n";
 						$compact[] = "'{$otherPluralName}'";
 					endif;
