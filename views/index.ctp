@@ -18,15 +18,20 @@
 <?php foreach ($fields as $field): 
 if($schema[$field]['type'] == 'date'){
 	?>
-	<div class="form-group col-xs-6 col-sm-2 col-md-2">
-		<label for="label<?php echo $field?>" class="col-sm-2 control-label">Email</label>
-		<?php echo "<?php \t\techo \$this->Form->input('{$field}',array('type'=>'text','id'=>'label".$field."','class'=>'form-control'));?>\n"; ?>
+	<div class="form-group">
+		<label for="label<?php echo $field?>" class="col-sm-2 control-label"><?php echo Inflector::humanize(Inflector::underscore($field));?></label>
+		<div class="col-xs-6 col-sm-2 col-md-2">
+		<?php echo "<?php \t\techo \$this->Form->input('{$field}',array('type'=>'text','id'=>'label".$field."','class'=>'form-control','label'=>false));?>\n"; ?>
+		</div>
 	</div>
 	<?php
 		}else{
 	?>
-	<div class="form-group col-xs-6 col-sm-2 col-md-4">
-		<?php echo "<?php \t\techo \$this->Form->input('{$field}',array('id'=>'label".$field."','class'=>'form-control'));?>\n"; ?>
+	<div class="form-group">
+		<label for="label<?php echo $field?>" class="col-sm-2 control-label"><?php echo Inflector::humanize(Inflector::underscore($field));?></label>
+		<div class="col-xs-6 col-sm-2 col-md-2">
+		<?php echo "<?php \t\techo \$this->Form->input('{$field}',array('id'=>'label".$field."','class'=>'form-control','label'=>false));?>\n"; ?>
+		</div>
 	</div>
 	<?php 
 		}
@@ -40,25 +45,6 @@ if($schema[$field]['type'] == 'date'){
 	<h2><?php echo "<?php echo __('{$pluralHumanName}'); ?>"; ?></h2>
 	<table class="table table-condensed table-hover">
 	<thead>
-	<tr>
-	<?php echo "<?php echo \$this->Form->create('{$modelClass}'); ?>\n"; ?>
-	<?php 
-		foreach ($fields as $field):
-		if($schema[$field]['type'] == 'date'){
-	?>
-			<td><?php echo "<?php \t\techo \$this->Form->input('{$field}',array('type'=>'text'));?>\n"; ?></td>
-	<?php
-		}else{
-	?>
-		<td><?php echo "<?php \t\techo \$this->Form->input('{$field}');?>\n"; ?></td>
-	<?php 
-		}
-		endforeach; ?>
-		<td><?php
-	echo "<?php echo \$this->Form->button(__('Submit')); ?>\n";
-?></td>
-	</tr>	
-	<?php echo "<?php echo \$this->Form->end(); ?>\n";?>
 	<tr>
 	<?php foreach ($fields as $field): ?>
 		<th><?php echo "<?php echo \$this->Paginator->sort('{$field}'); ?>"; ?></th>

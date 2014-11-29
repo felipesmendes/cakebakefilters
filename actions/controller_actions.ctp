@@ -51,14 +51,17 @@
 						$otherPluralName = Inflector::variable(
 							Inflector::pluralize(preg_replace('/_id$/', '', $keyName))
 						);
-						echo "\t\t\${$otherPluralName} = \$this->{$currentModelName}->{$otherModelName}->find('list');\n";
+						echo "\t\t\${$otherPluralName}[''] = __('Select');\n";
+						echo "\t\t\${$otherPluralName} = array_merge($".$otherPluralName.",\$this->{$currentModelName}->{$otherModelName}->find('list'));\n";
 						$compact[] = "'{$otherPluralName}'";
 					endif;
 				endforeach;
 			endforeach;
-			if (!empty($compact)):
+			if (!empty($compact)){
 				echo "\t\t\$this->set(compact(".join(', ', $compact).",'".$pluralName."'));\n";
-			endif;
+			} else {
+				echo "\t\t\$this->set(compact('".$pluralName."'));\n";
+			}
 		?>
 	}
 
