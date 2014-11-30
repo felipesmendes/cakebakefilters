@@ -15,13 +15,15 @@
  */
 ?>
 <?php echo "<?php echo \$this->Form->create('{$modelClass}',array('class' => 'form-horizontal','role' => 'form')); ?>\n"; ?>
-<?php foreach ($fields as $field): 
-if($schema[$field]['type'] == 'date'){
+<?php foreach ($fields as $field):
+if($schema[$field]['type'] == 'date' || $schema[$field]['type'] == 'datetime' || $schema[$field]['type'] == 'timestamp'){
 	?>
 	<div class="form-group">
 		<label for="label<?php echo $field?>" class="col-sm-2 control-label"><?php echo Inflector::humanize(Inflector::underscore($field));?></label>
 		<div class="col-xs-6 col-sm-2 col-md-2">
 		<?php echo "<?php \t\techo \$this->Form->input('{$field}',array('type'=>'text','id'=>'label".$field."','class'=>'form-control','label'=>false));?>\n"; ?>
+		to 
+		<?php echo "<?php \t\techo \$this->Form->input('{$field}_final',array('type'=>'text','id'=>'label".$field."','class'=>'form-control','label'=>false));?>\n"; ?>
 		</div>
 	</div>
 	<?php

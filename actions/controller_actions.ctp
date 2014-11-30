@@ -29,8 +29,10 @@
 			$fields = array();
 			foreach($this->request->data['<?php echo $currentModelName ?>'] as $field => $value){
 				if(!empty($value)){
-					if($this-><?php echo $currentModelName ?>->getColumnType($field) == 'date'){
-						$fields['<?php echo $currentModelName ?>.'.$field.' BETWEEN ? AND ?'] = array(date("Y-m-d H:i:s",strtotime("-1 DAY",strtotime($value))),$value);
+					if($this-><?php echo $currentModelName ?>->getColumnType($field) == 'date' ||
+					   $this-><?php echo $currentModelName ?>->getColumnType($field) == 'datetime' ||
+					   $this-><?php echo $currentModelName ?>->getColumnType($field) == 'timestamp' && strpos($field,"_final") === false){
+						$fields['<?php echo $currentModelName ?>.'.$field.' BETWEEN ? AND ?'] = array($value,$this->request->data['<?php echo $currentModelName ?>'][$field.'_final']);
 					}else if($this-><?php echo $currentModelName ?>->getColumnType($field) == 'string'){
 						$fields['<?php echo $currentModelName ?>.'.$field.' LIKE'] = "%{$value}%";
 					}else if($this-><?php echo $currentModelName ?>->getColumnType($field) == 'integer'){
