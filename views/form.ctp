@@ -13,6 +13,13 @@
  * @since         CakePHP(tm) v 1.2.0.5234
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+echo "<?php \$this->Html->addCrumb('{$modelClass}', array('controller' => '{$modelClass}', 'action' => 'index'));?>\n";
+if($action == 'add'){
+	echo "<?php \$this->Html->addCrumb('Add {$modelClass}', array('controller' => '{$modelClass}', 'action' => 'add'));?>\n";
+}else{
+	echo "<?php \$this->Html->addCrumb('Edit {$modelClass}', array('controller' => '{$modelClass}', 'action' => 'edit',\$this->Form->value('{$modelClass}.{$primaryKey}')));?>\n";
+}
+
 ?>
 <div class="<?php echo $pluralVar; ?> form">
 <?php echo "<?php echo \$this->Form->create('{$modelClass}'); ?>\n"; ?>

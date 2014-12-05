@@ -13,6 +13,8 @@
  * @since         CakePHP(tm) v 1.2.0.5234
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+echo "<?php \$this->Html->addCrumb('{$modelClass}', array('controller' => '{$modelClass}', 'action' => 'index'));?>\n";
+echo "<?php \$this->Html->addCrumb('View {$modelClass}', array('controller' => '{$modelClass}', 'action' => 'view',\${$singularVar}['{$modelClass}']['{$primaryKey}']));?>\n";
 ?>
 <div class="<?php echo $pluralVar; ?> view">
 <h2><?php echo "<?php echo __('{$singularHumanName}'); ?>"; ?></h2>
